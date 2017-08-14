@@ -1,34 +1,5 @@
-# Student array
-students = [
-  {name: "Dr. Hannibal Lecter", cohort: :november},
-  {name: "Darth Vader", cohort: :november},
-  {name: "Nurse Ratched", cohort: :november},
-  {name: "Michael Corleone", cohort: :november},
-  {name: "Alex DeLarge", cohort: :november},
-  {name: "The Wicked Witch of the West", cohort: :november},
-  {name: "Terminator", cohort: :november},
-  {name: "Freddy Krueger", cohort: :november},
-  {name: "The Joker", cohort: :november},
-  {name: "Joffrey Baratheon", cohort: :november},
-  {name: "Norman Bates", cohort: :november} ]
-
 # Methods
- def print_header
-     puts "The students of Villains Academy"
-     puts "-------------"
- end
-
- def print(names)
-   names.each do | student |
-     puts "#{student[:name]} (#{student[:cohort]} cohort)"
-   end
- end
-
- def print_footer(names)
-   puts "Overall, we have #{names.count} great students"
- end
-
- def input_students
+def input_students
    puts "Please enter the names of the students"
    puts "To finish, just hit the return key twice"
    # Empty array
@@ -46,8 +17,24 @@ students = [
    # return the array of students
      students
    end
+   # Header
+ def print_header
+     puts "The students of Villains Academy"
+     puts "-------------"
+ end
 
-# Calling the methods
+    # Print hashes
+ def print (names)
+   names.each.with_index(1) do | student, i |
+     puts "#{i}: #{student[:name]} (#{student[:cohort]} cohort)"
+   end
+ end
+    # Print footer & .count
+ def print_footer(names)
+   puts "Overall, we have #{names.count} great students"
+ end
+#
+# Calling methods
 students = input_students
 print_header
 print(students)
