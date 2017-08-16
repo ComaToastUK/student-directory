@@ -24,28 +24,21 @@ def input_students
  end
 
     # Print hashes
- def print (names)
-   names.each.with_index(1) do | student, i |
-     if student[:name].length < 12
-       puts "#{i}: #{student[:name]} (#{student[:cohort]} cohort)"
-     end
-   end
-    puts
-    puts "The students with names beginning with J..."
-   names.each.with_index(1) do |student, i|
-       if student[:name][0] == ("J")
-         puts "#{i}: #{student[:name]} (#{student[:cohort]} cohort)"
-       end
+ def print (students)
+   i = 0
+   while students.count > i
+     puts "#{i+1}: #{students[i][:name]} (#{students[i][:cohort]} cohort)"
+     i += 1
    end
  end
     # Print footer & .count
  def print_footer(names)
+   puts
    puts "Overall, we have #{names.count} great students"
  end
-#
+
 # Calling methods
 students = input_students
 print_header
-#puts select_names_starting_with(students, 'J')
 print(students)
 print_footer(students)
