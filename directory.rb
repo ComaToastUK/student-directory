@@ -26,7 +26,9 @@ def input_students
     # Print hashes
  def print (names)
    names.each.with_index(1) do | student, i |
-     puts "#{i}: #{student[:name]} (#{student[:cohort]} cohort)"
+     if student[:name].length < 12
+       puts "#{i}: #{student[:name]} (#{student[:cohort]} cohort)"
+     end
    end
     puts
     puts "The students with names beginning with J..."
