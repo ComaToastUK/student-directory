@@ -5,14 +5,14 @@ def input_students
    # Empty array
    students = []
    # get the furst name
-   name = gets.chomp
+   name = gets.chomp.capitalize
    # while the name is not empty: repeat
    while !name.empty? do
      #add the student hash to the array
      students << {name: name, cohort: :november}
      puts "Now we have #{students.count} students"
      # get another name from the user
-     name = gets.chomp
+     name = gets.chomp.capitalize
    end
    # return the array of students
      students
@@ -28,6 +28,13 @@ def input_students
    names.each.with_index(1) do | student, i |
      puts "#{i}: #{student[:name]} (#{student[:cohort]} cohort)"
    end
+    puts
+    puts "The students with names beginning with J..."
+   names.each.with_index(1) do |student, i|
+       if student[:name][0] == ("J")
+         puts "#{i}: #{student[:name]} (#{student[:cohort]} cohort)"
+       end
+   end
  end
     # Print footer & .count
  def print_footer(names)
@@ -37,5 +44,6 @@ def input_students
 # Calling methods
 students = input_students
 print_header
+#puts select_names_starting_with(students, 'J')
 print(students)
 print_footer(students)
