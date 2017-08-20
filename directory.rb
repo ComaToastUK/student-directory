@@ -1,14 +1,24 @@
 # Methods
 def input_students
-   puts "Please enter the names of the students"
+   puts "Please enter the full name of the student"
    puts "To finish, just hit the return key twice"
    students = [] # Empty array
    name = gets.chomp.capitalize # get the first name
    while !name.empty? do
-     puts "Please enter the month of the cohort" #cohort
+
+     puts "Please enter the month of the cohort"
      cohort = gets.chomp.capitalize
-     #add the student hash to the array
-     students << {name: name, cohort: cohort}
+
+     #country
+     puts "Please enter the country of birth"
+     country = gets.chomp.capitalize
+
+     #age
+     puts "Please enter the student\'s age"
+     age = gets.chomp.to_s
+
+    #add the student hash to the array
+     students << {name: name, cohort: cohort, country: country, age: age}
      if (students.count > 1)
        puts "Now we have #{students.count} students"
      else
@@ -20,7 +30,7 @@ def input_students
      return students # return the array of students
    end
    # Header
-def print_header
+ def print_header
      puts "The students of Villains Academy".center(75)
      puts "-------------".center(75)
  end
@@ -30,7 +40,7 @@ def print (students)
    i = 0
    lineWidth = 40
    while students.count > i
-     puts "#{i+1}: #{students[i][:name]} (#{students[i][:cohort]} cohort)".ljust(25)
+     puts "#{i+1}: #{students[i][:name]} (#{students[i][:cohort]} cohort). Born: #{students[i][:country]} - Age: #{students[i][:age]}".ljust(25)
      i += 1
    end
 end
