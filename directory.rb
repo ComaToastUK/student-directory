@@ -1,4 +1,28 @@
 # Methods
+def interactive_menu
+  students = []
+  loop do
+    # 1. print the menu and ask the user what to do
+    puts "1. Input the students"
+    puts "2. Show the students"
+    puts "9. Exit"
+    # 2. read the input and save it into a variable
+    selection = gets.chomp
+    # 3. do what the user has asked
+    case selection
+    when "1"
+      students = input_students
+    when "2"
+      print_header
+      print(students)
+      print_footer(students)
+    when "9"
+      exit
+    else puts "I don't know what you meant, try again"
+    end
+  end
+end
+
 def input_students
    puts "Please enter the full name of the student"
    puts "To finish, just hit the return key twice"
@@ -39,6 +63,9 @@ def input_students
 def print (students)
    i = 0
    lineWidth = 40
+   if students.count == 0
+    return nil
+  end
    while students.count > i
      puts "#{i+1}: #{students[i][:name]} (#{students[i][:cohort]} cohort). Born: #{students[i][:country]} - Age: #{students[i][:age]}".ljust(25)
      i += 1
@@ -56,7 +83,4 @@ end
 
 
 # Calling methods
-students = input_students
-print_header
-print(students)
-print_footer(students)
+interactive_menu
