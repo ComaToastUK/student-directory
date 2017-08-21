@@ -6,19 +6,19 @@ def input_students
    puts "Please enter the full name of the student"
    puts "To finish, just hit the return key twice"
    students = [] # Empty array
-   name = gets.chomp.capitalize # get the first name
+   name = STDIN.gets.chomp.capitalize # get the first name
    while !name.empty? do
 
      puts "Please enter the month of the cohort"
-     cohort = gets.chomp.capitalize
+     cohort = STDIN.gets.chomp.capitalize
 
      #country
      puts "Please enter the country of birth"
-     country = gets.chomp.capitalize
+     country = STDIN.gets.chomp.capitalize
 
      #age
      puts "Please enter the student\'s age"
-     age = gets.chomp.to_s
+     age = STDIN.gets.chomp.to_s
 
     #add the student hash to the array
      @students << {name: name, cohort: cohort, country: country, age: age}
@@ -28,7 +28,7 @@ def input_students
        puts "Now we have #{@students.count} student"
      end
      puts "Please enter the details of another student. Hit the return key twice to finish."
-     name = gets.chomp.capitalize # get another name from the user
+     name = STDIN.gets.chomp.capitalize # get another name from the user
    end
      return students # return the array of students
 end
@@ -45,13 +45,25 @@ def save_students
   file.close
 end
 
-def load_students
-  file = File.open("students.csv", "r")
+def load_students(filename = "students.csv")
+  file = File.open(filename, "r")
   file.readlines.each do |line|
-  name, cohort = line.chomp.split(',')
+    name, cohort = line.chomp.split(',')
     @students << {name: name, cohort: cohort.to_sym}
   end
   file.close
+end
+
+def try_load_students
+  filename = ARGV.first # first argument from the command line
+  return if filename.nil? # get out of the method if it isn't given
+  if File.exists?(filename) # if it exists
+    load_students(filename)
+     puts "Loaded #{@students.count} from #{filename}"
+  else # if it doesn't exist
+    puts "Sorry, #{filename} doesn't exist."
+    exit # quit the program
+  end
 end
 
 def print_menu
@@ -71,7 +83,7 @@ end
 def interactive_menu
   loop do
     print_menu
-    process(gets.chomp)
+    process(STDIN.gets.chomp)
   end
 end
 
