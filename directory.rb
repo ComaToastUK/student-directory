@@ -27,6 +27,7 @@ def save_students
     file.puts csv_line
   end
   file.close
+  puts "File saved"
 end
 
 def add_students(name, cohort)
@@ -40,6 +41,7 @@ def load_students(filename = "students.csv")
     add_students(name, cohort)
   end
   file.close
+  puts "Loaded students from file"
 end
 
 def try_load_students
