@@ -1,7 +1,5 @@
 @students = []
 
-# Methods
-
 def input_students
    puts "Please enter the full name of the student"
    puts "To finish, just hit the return key twice"
@@ -11,14 +9,9 @@ def input_students
 
      puts "Please enter the month of the cohort"
      cohort = STDIN.gets.chomp.capitalize
-
-    #add the student hash to the array
-     @students << {name: name, cohort: cohort}
-     if (@students.count > 1)
-       puts "Now we have #{@students.count} students"
-     else
-       puts "Now we have #{@students.count} student"
-     end
+    #add_students call
+     add_students(name, cohort)
+     @students.count > 1 ? (puts "Now we have #{@students.count} students") : (puts "Now we have #{@students.count} student")
      puts "Please enter the details of another student. Hit the return key twice to finish."
      name = STDIN.gets.chomp.capitalize # get another name from the user
    end
@@ -37,11 +30,15 @@ def save_students
   file.close
 end
 
+def add_students(name, cohort)
+  @students << {name: name.capitalize, cohort: cohort.to_sym}
+end
+
 def load_students(filename = "students.csv")
   file = File.open(filename, "r")
   file.readlines.each do |line|
     name, cohort = line.chomp.split(',')
-    @students << {name: name, cohort: cohort.to_sym}
+    add_students(name, cohort)
   end
   file.close
 end
@@ -108,7 +105,7 @@ def print_students_list
    lineWidth = 40
    if @students.count == 0
     return nil
-  end
+   end
    while @students.count > i
      puts "#{i+1}: #{@students[i][:name]} (#{@students[i][:cohort]} cohort)".ljust(25)
      i += 1
@@ -127,7 +124,7 @@ end
 def load_by_default
   if (@students.count == 0)
    load_students
- end
+  end
 end
 
 # Calling methods
