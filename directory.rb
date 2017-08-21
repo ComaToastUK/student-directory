@@ -12,16 +12,8 @@ def input_students
      puts "Please enter the month of the cohort"
      cohort = STDIN.gets.chomp.capitalize
 
-     #country
-     puts "Please enter the country of birth"
-     country = STDIN.gets.chomp.capitalize
-
-     #age
-     puts "Please enter the student\'s age"
-     age = STDIN.gets.chomp.to_s
-
     #add the student hash to the array
-     @students << {name: name, cohort: cohort, country: country, age: age}
+     @students << {name: name, cohort: cohort}
      if (@students.count > 1)
        puts "Now we have #{@students.count} students"
      else
@@ -38,7 +30,7 @@ def save_students
   file = File.open("students.csv", "w")
   # iterate over the array of students
   @students.each do |student|
-    student_data = [student[:name], student[:cohort], student[:country], student[:age]]
+    student_data = [student[:name], student[:cohort]]
     csv_line = student_data.join(",")
     file.puts csv_line
   end
@@ -118,7 +110,7 @@ def print_students_list
     return nil
   end
    while @students.count > i
-     puts "#{i+1}: #{@students[i][:name]} (#{@students[i][:cohort]} cohort). Born: #{@students[i][:country]} - Age: #{@students[i][:age]}".ljust(25)
+     puts "#{i+1}: #{@students[i][:name]} (#{@students[i][:cohort]} cohort)".ljust(25)
      i += 1
    end
 end
@@ -132,6 +124,12 @@ def print_footer
    end
 end
 
+def load_by_default
+  if (@students.count == 0)
+   load_students
+ end
+end
 
 # Calling methods
+load_by_default
 interactive_menu
