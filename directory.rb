@@ -6,7 +6,6 @@ def input_students
    students = [] # Empty array
    name = STDIN.gets.chomp.capitalize # get the first name
    while !name.empty? do
-
      puts "Please enter the month of the cohort"
      cohort = STDIN.gets.chomp.capitalize
     #add_students call
@@ -113,12 +112,7 @@ def print_students_list
 end
     # Print footer & .count
 def print_footer
-   puts
-   if (@students.count > 1)
-     puts "Overall, we have #{@students.count} great students".center(75)
-   else
-     puts "Overall, we have #{@students.count} great student".center(75)
-   end
+   @students.count > 1 ? (puts "Overall, we have #{@students.count} great students".center(75)) : (puts "Overall, we have #{@students.count} great student".center(75))
 end
 
 def load_by_default
